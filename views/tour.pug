@@ -78,6 +78,23 @@ block content
         .reviews
             each review in tour.reviews
                 +reviewCard(review)
+        if user 
+            .review-actions
+                button.btn.btn--white.span-all-rows#add-review add a review
+        else 
+            .review-actions
+                a.btn.btn--white.span-all-rows(href='/login') Log in to add a review
+        
+        .add-review-section.user-view__form-container
+            form.form.hidden#review-form(data-tour-id= `${tour.id}`)
+                .form__group
+                    label.form__label(for='review') Review  
+                    input#review.form__input(type='text', required, name='review')
+                .form-group
+                    label.form__label(for="rating") Rating
+                    input#rating.form__input(type="number", name="rating", min="1", max="5", required)
+                .form__group.right
+                    button.btn.btn--white.btn--submit-review#submit-review Submit review
 
 
     section.section-cta

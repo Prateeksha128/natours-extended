@@ -678,6 +678,13 @@ body {
   fill: #bbb;
 }
 
+.review-actions {
+  justify-content: center;
+  align-items: center;
+  display: grid;
+  margin: 0.5rem;
+}
+
 .section-cta {
   margin-top: calc(0px - var(--section-rotate));
   padding: 3rem;
@@ -1335,4 +1342,15 @@ body {
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
   -webkit-transform: translateY(-2px);
   transform: translateY(-2px);
+}
+
+
+
+/* tiksha */
+.hidden {
+    display: none;
+}
+
+.btn--submit-review{
+  margin-top: 2rem;
 }

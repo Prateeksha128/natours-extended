@@ -4,6 +4,7 @@ import { login, logout, signup } from './login';
 import { displayMap } from './leaflet';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
+import { addReview } from './review';
 
 // DOM ELEMENTS
 const mapview = document.getElementById('map');
@@ -13,7 +14,9 @@ const logoutBtn = document.querySelector('.nav__el--logout');
 const userDataForm = document.querySelector('.form-user-data');
 const UserPasswordForm = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour');
-
+const reviewBtn = document.getElementById('add-review');
+const submitBtn = document.getElementById('submit-review');
+const reviewForm = document.getElementById('review-form');
 
 // DELEGATION
 if (mapview) {
@@ -86,9 +89,35 @@ if (UserPasswordForm) {
 }
 
 if (bookBtn) {
-  bookBtn.addEventListener('click', e => {
+  bookBtn.addEventListener('click', (e) => {
     e.target.textContent = 'Processing...';
     const { tourId } = e.target.dataset;
+    console.log(tourId);
     bookTour(tourId);
-  })
+  });
+}
+if (reviewBtn) {
+  reviewBtn.addEventListener('click', (e) => {
+    console.log('here');
+    reviewForm.classList.remove('hidden');
+  });
+}
+
+if (submitBtn) {
+  reviewForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    console.log('form submit');
+    console.log(e.target);
+    
+
+    const review = document.getElementById('review').value;
+    const rating = document.getElementById('rating').value;
+    const { tourId } = e.target.dataset;
+    console.log([review, rating, tourId]);
+    document.getElementById('review').value = '';
+    document.getElementById('rating').value = '';
+    await addReview(rating, review, tourId);
+
+    reviewForm.classList.add('hidden');
+  });
 }
