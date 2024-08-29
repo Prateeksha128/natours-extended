@@ -7,6 +7,8 @@ const router = express.Router();
 
 router.get('/', bookingController.createBookingCheckout, authController.isLoggedIn, viewController.getOverview);
 
+router.get('/signup', authController.isLoggedIn, viewController.getSignUpForm);
+
 router.get('/login', authController.isLoggedIn, viewController.getLoginForm);
 
 router.get('/tour/:slug', authController.isLoggedIn, viewController.getTour);

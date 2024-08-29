@@ -1,6 +1,6 @@
 /* eslint-disable */
 import '@babel/polyfill';
-import { login, logout } from './login';
+import { login, logout, signup } from './login';
 import { displayMap } from './leaflet';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
@@ -8,6 +8,7 @@ import { bookTour } from './stripe';
 // DOM ELEMENTS
 const mapview = document.getElementById('map');
 const loginForm = document.querySelector('.form--login');
+const signupForm = document.querySelector('.form--signup');
 const logoutBtn = document.querySelector('.nav__el--logout');
 const userDataForm = document.querySelector('.form-user-data');
 const UserPasswordForm = document.querySelector('.form-user-password');
@@ -27,6 +28,24 @@ if (loginForm) {
     const password = document.getElementById('password').value;
     // console.log(email, password);
     login(email, password);
+  });
+}
+
+if (signupForm) {
+  console.log('here2222');
+
+  signupForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    console.log(document.querySelector('.btn--signup').textContent);
+
+    document.querySelector('.btn--signup').textContent = 'Signing in...';
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const passwordConfirm = document.getElementById('password-confirm').value;
+    console.log(name, email, password, passwordConfirm);
+    await signup(name, email, password, passwordConfirm);
+    document.querySelector('.btn--signup').textContent = 'Sign Up';
   });
 }
 

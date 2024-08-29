@@ -30,6 +30,41 @@ export const login = async (email, password) => {
   }
 };
 
+export const signup = async (name, email, password, passwordConfirm) => {
+  console.log("here 898");
+  
+  try {
+    const res = await axios({
+      method: 'POST',
+      url: '/api/v1/users/signup',
+      data: {
+        name,
+        email,
+        password,
+        passwordConfirm
+      },
+    });
+    console.log(res);
+    
+    console.log('Response received:');
+    // console.log(res);
+    if (res.data.status === 'success') {
+      showAlert('success', 'Logged in successfully!');
+      window.setTimeout(() => {
+        location.assign('/');
+      }, 500);
+    }
+  } catch (err) {
+    // console.error('Error occurred during login request:', err);
+    if (err.response) {
+      // console.error('Error response data:', err.response.data);
+      showAlert('error', err.response.data.message);
+    } else {
+      showAlert('error', 'An error occurred. Please try again later.');
+    }
+  }
+};
+
 export const logout = async () => {
   try {
     const res = await axios({
